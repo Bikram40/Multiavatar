@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:multiavatar/multiavatar.dart';
 
 void main() {
@@ -41,14 +42,20 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SvgPicture.string(_controller.text,height: 50,
+            width: 50,),
+            SizedBox(
+              height: 20,
+            ),
             FloatingActionButton(
               onPressed: () {
                 ///The svg code
-                log(multiavatar(DateTime.now().toIso8601String()));
                 setState(() {
                   _controller.text =
-                      multiavatar(DateTime.now().toIso8601String());
+                      multiavatar(DateTime.now().toIso8601String(),
+                      radius: 10);
                 });
+                log(_controller.text);
               },
               tooltip: 'Generate',
               child: Icon(Icons.gesture),

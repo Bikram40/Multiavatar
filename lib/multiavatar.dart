@@ -2,8 +2,8 @@ library multiavatar;
 
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
-
-String multiavatar(String string, {bool trBackground = false}) {
+/// [radius] 0 to 999
+String multiavatar(String string, {bool trBackground = false,int radius =999}) {
   string += '';
 
   Map<String, Map<String, Map<String, List<String>>>> themes = {
@@ -1032,6 +1032,12 @@ String multiavatar(String string, {bool trBackground = false}) {
     _final[part] = getFinal(part, partV, theme);
   }
 
+
+  String color = _final['env'].toString().substring(
+      _final['env'].toString().indexOf('#'),
+      _final['env'].toString().indexOf(';'));
+  _final['env'] =
+  """<rect id="Rectangle_1" data-name="Rectangle 1" width="231" height="231" rx="$radius" fill="$color"/>""";
   if (trBackground) _final['env'] = '';
 
   return (svgStart +
